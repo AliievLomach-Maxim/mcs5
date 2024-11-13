@@ -1,8 +1,29 @@
-# React + Vite
+# Module-01
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Less-01
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Знайомство
+  - Бібліотека React
+  - Екосистема бібліотек
+  - Патерни
+- Створення проекту
+  - https://vite.dev/
+  - Налаштування ESLint + `react/prop-types:0`
+  - Деплой на Vercel
+- Інструменти розробника
+- Кмопоненти
+- Суворий режим
+- JSX
+  - Особливості
+  - Прааило спільного батька
+  - Фрагмент
+  - JSX вирази
+- Налаштування компонента
+  - Props
+  - Деструктуризація
+- Умовний рендер
+  - &&
+  - ? :
+  - Значення, що не відображаются
+- Колекції
+- Children (optional)
