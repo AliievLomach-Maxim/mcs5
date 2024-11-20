@@ -1,120 +1,54 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Timer from './components/Timer/Timer'
 
-// const Clicker = () => {
-// 	const [value2, setValue2] = useState(100)
-
-// 	const handleCLick2 = () => {
-// 		setValue2(value2 + 1)
-// 	}
-
-// 	return (
-// 		<>
-// 			<h1>{value2}</h1>
-// 			<button onClick={handleCLick2}>click 2</button>
-// 		</>
-// 	)
-// }
-
-const Title = ({ value }) => {
-	return <div>{value}</div>
-}
-
-// const Clicker2 = ({ handleSetValue, valueKey }) => {
-// 	const handleClick = () => {
-// 		handleSetValue(valueKey)
-// 	}
-// 	return <button onClick={handleClick}>click 2</button>
-// }
-const Clicker2 = ({ handleSetValue }) => {
-	return <button onClick={handleSetValue}>click 2</button>
-}
-// const Clicker2 = ({ handleSetValue }) => {
-// 	return <button onClick={() => handleSetValue('value1')}>click 2</button>
-// }
-//
-// =======
-//
-// function App() {
-// 	const [value, setValue] = useState(10)
-// 	const [value2, setValue2] = useState(10)
-
-// 	const handleSetValue = () => {
-// 		setValue(value + 1)
-// 	}
-// 	const handleSetValue2 = () => {
-// 		setValue2(value2 + 1)
-// 	}
-// 	return (
-// 		<>
-// 			<Title value={value} />
-// 			<Title value={value2} />
-// 			<Title value={value2 + value} />
-
-// 			<Clicker2 handleSetValue={handleSetValue} />
-// 			<Clicker2 handleSetValue={handleSetValue2} />
-// 		</>
-// 	)
-// }
-function App() {
-	const [valueObj, setValueObj] = useState({
-		value1: 10,
-		value2: 100,
+const App = () => {
+	// const [click, setClick] = useState(0)
+	const [click, setClick] = useState(() => {
+		const clicks = localStorage.getItem('clicks')
+		if (clicks !== null) {
+			return JSON.parse(clicks)
+		}
+		return 0
 	})
+	const [click2, setClick2] = useState(0)
+	const [isShow, setIsShow] = useState(false)
 
-	const handleSetValue = (key) => {
-		// setValueObj(valueObj[key] + 1)
-		setValueObj({
-			...valueObj,
-			[key]: valueObj[key] + 1,
-		})
-	}
+	// Mount
+	// useEffect(() => {
+	// 	console.log('Effect')
+	// 	const clicks = localStorage.getItem('clicks')
+	// 	if (clicks !== null) {
+	// 		setClick(JSON.parse(clicks))
+	// 	}
+	// }, [])
+
+	// Mount + Update
+	useEffect(() => {
+		console.log('click', click)
+		// if (click !== 0)
+		localStorage.setItem('clicks', click)
+	}, [click])
+
+	// Update
+	useEffect(() => {
+		if (click2 === 0) return
+		console.log('click 2', click2)
+	}, [click2])
+
+	// useEffect(() => {
+	// 	console.log(click)
+	// 	// ....
+	// }, [click, click2, int])
 
 	return (
-		<>
-			<Title value={valueObj.value1} />
-			<Title value={valueObj.value2} />
-			<Title value={valueObj.value2 + valueObj.value1} />
-
-			{/* <Clicker2 handleSetValue={handleSetValue} />
-			<Clicker2 handleSetValue={handleSetValue} /> */}
-
-			<Clicker2 handleSetValue={() => handleSetValue('value1')} />
-			<Clicker2 handleSetValue={() => handleSetValue('value2')} />
-
-			{/* <Clicker2 handleSetValue={handleSetValue} valueKey='value1' />
-			<Clicker2 handleSetValue={handleSetValue} valueKey='value2' /> */}
-		</>
+		<div>
+			<button onClick={() => setClick(click + 1)}>{click}</button>
+			<button onClick={() => setClick2(click2 + 1)}>{click2}</button>
+			<br />
+			<button onClick={() => setIsShow(!isShow)}>click</button>
+			{isShow && <Timer />}
+		</div>
 	)
 }
 
 export default App
-
-// function par() {
-
-// let value = 10
-// const setValue = (val) => { value = val }
-
-// 	child1(value, setValue)
-// 	child2(value, setValue)
-// }
-
-// function child1(value, setValue) {
-// 	console.log(value)
-// 	setValue(12)
-// }
-
-// function child2(value, setValue) {
-// 	console.log(value)
-// 	setValue(11)
-// }
-
-// let user = {
-// 	name: 'Alex',
-// 	age: 42,
-// }
-
-// // user = 'bob'
-// user = {
-// 	...user,
-// 	name:'bob'
-// }
