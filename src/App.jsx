@@ -1,48 +1,37 @@
-import { useEffect, useState } from 'react'
-import data from '../posts.json'
-import Paginator from './components/Paginator/Paginator'
-import Poster from './components/Poster/Poster'
-
-const generateDefaultState = () => {
-	const currentPost = localStorage.getItem('currentPost')
-	if (currentPost) {
-		return JSON.parse(currentPost)
-	}
-	return 1
-}
+import ControlForm from './components/ControlForm/ControlForm'
 
 const App = () => {
-	const [currentPost, setCurrentPost] = useState(generateDefaultState)
-
-	const postsCount = data.length
-	const post = data[currentPost - 1]
-
-	const handleNext = () => {
-		if (currentPost === postsCount) return
-		setCurrentPost(currentPost + 1)
+	const toSubmit = (data) => {
+		console.log('data', data)
 	}
-	const handlePrev = () => {
-		if (currentPost === 1) return
-		setCurrentPost(currentPost - 1)
-	}
-	document.title = 'HELLO'
-	useEffect(() => {
-		localStorage.setItem('currentPost', currentPost)
-	}, [currentPost])
-
 	return (
-		<>
-			<Paginator
-				postsCount={postsCount}
-				handleNext={handleNext}
-				handlePrev={handlePrev}
-				currentPost={currentPost}
-			/>
-			<hr />
-			<hr />
-			<Poster post={post} />
-		</>
+		<div>
+			<ControlForm toSubmit={toSubmit} />
+		</div>
 	)
 }
 
 export default App
+// import Form from './components/Form/Form'
+
+// const App = () => {
+// 	const handleSubmit = (data) => {
+// 		//
+// 		console.log('data', data)
+// 	}
+// 	const handleSubmit2 = (data) => {
+// 		//
+// 		console.log('data!!!!!!!', data)
+// 	}
+// 	return (
+// 		<div>
+// 			{/* <Form submit={handleSubmit} />
+// 			<hr />
+// 			<Form submit={handleSubmit2} /> */}
+// 			<hr />
+// 			<hr />
+// 		</div>
+// 	)
+// }
+
+// export default App
