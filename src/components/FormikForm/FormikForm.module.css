@@ -1,9 +1,0 @@
-.flex {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	gap: 12px;
-	width: 100%;
-	max-width: 600px;
-	flex-direction: column;
-}
