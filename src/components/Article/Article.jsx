@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom'
+
 const Article = ({ article }) => {
-	return (
-		<li>
-			<a href={article.url || article.story_url}>{article.title || article.story_title}</a>
-		</li>
-	)
+  return (
+    <li>
+      <Link to={`/articles/${article.objectID}`}>{article.title || article.story_title}</Link>
+    </li>
+  )
 }
 
 export default Article
