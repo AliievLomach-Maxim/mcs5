@@ -1,53 +1,44 @@
-import { createStore } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
+import { counterPersistedReducer } from './counterSlice'
+import { usersReducer } from './usersSlice'
 
-const COUNTER_VALUE_INCREMENT = 'COUNTER_VALUE_INCREMENT'
+import { persistStore } from 'redux-persist'
 
-export const incrementCounterValue = (data) => ({
-  type: COUNTER_VALUE_INCREMENT,
-  payload: data,
-})
-
-export const decrementCounterValue = (data) => ({
-  type: 'counter/value/decrement',
-  payload: data,
-})
-
-// if(test === 'test')
-
-const initialState = {
-  counter: {
-    value: 0,
-    value1: 0,
-    value2: 0,
+export const store = configureStore({
+  reducer: {
+    counter: counterPersistedReducer,
+    users: usersReducer,
+    users2: usersReducer,
+    users3: usersReducer,
   },
-  users: {
-    data: [],
-    extraData: [],
-  },
-}
+})
+export const persistor = persistStore(store)
 
-const rootReducer = (state, action) => {
-  switch (action.type) {
-    case COUNTER_VALUE_INCREMENT:
-      return {
-        ...state,
-        counter: {
-          ...state.counter,
-          value: state.counter.value + action.payload,
-        },
-      }
-    case 'counter/value/decrement':
-      return {
-        ...state,
-        counter: {
-          ...state.counter,
-          value: state.counter.value - action.payload,
-        },
-      }
+// import { combineReducers, configureStore } from '@reduxjs/toolkit'
+// import { counterPersistedReducer } from './counterSlice'
+// import { usersReducer } from './usersSlice'
 
-    default:
-      return state
-  }
-}
+// import { persistStore, persistReducer } from 'redux-persist'
+// import storage from 'redux-persist/lib/storage'
 
-export const store = createStore(rootReducer, initialState)
+// const rootReducer = combineReducers({
+//   counter: counterPersistedReducer,
+//   users: usersReducer,
+//   users2: usersReducer,
+//   users3: usersReducer,
+// })
+
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+//   // blacklist: ['counter'],
+//   whitelist: ['counter', 'users'],
+// }
+
+// const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+// export const store = configureStore({
+//   reducer: persistedReducer,
+// })
+
+// export const persistor = persistStore(store)
