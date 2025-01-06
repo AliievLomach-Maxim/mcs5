@@ -3,6 +3,7 @@ import { counterPersistedReducer } from './counterSlice'
 import { usersReducer } from './usersSlice'
 
 import { persistStore } from 'redux-persist'
+import { postReducer } from './postsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     users: usersReducer,
     users2: usersReducer,
     users3: usersReducer,
+    posts: postReducer,
   },
 })
 export const persistor = persistStore(store)
