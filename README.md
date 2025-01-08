@@ -290,3 +290,41 @@
             <li>Додавання PersistGate</li>
         </ul>
 </details>
+
+# Module-07
+
+<details>
+  <summary>Заняття 1</summary>
+<ul>
+    <li>https://64689aefe99f0ba0a8286f54.mockapi.io/</li>
+    <li>Асинхронні операції</li>
+    <li>Форма стану слайса: <code>loading, error, data</code></li>
+    <li>Оголошення операції <code>fetchTasks</code> через <code>createAsyncThunk</code> </li>
+        <ul>
+            <li>Діспатч операції у компоненті при монтуванні</li>
+            <li>Екшени операції: <code>pending, fulfilled, rejected</code></li>
+            <li>Обробка результату операцій у слайсі <code>xetraReducers</code></li>
+            <li>Обробка запиту, що завершився з помилкою <code>rejectWithValue</code></li>
+        </ul>
+    <li>Операції <code>addTask</code> та <code>deleteTask</code></li>
+        <ul>
+            <li>Діспатч операцій у компонентах</li>
+            <li>Обробка результату операцій у слайсі</li>
+        </ul>
+</ul>
+</details>
+
+<details>
+  <summary>Заняття 2</summary>
+<ul>
+    <li>Функції-селектори</li>
+    <li>Зберігання у файлі слайссу</li>
+    <li>Найменування <code>select</code></li>
+    <li>Прості селектори</li>
+    <li>Складові селектори</li>
+    <li>Мемоізація селекторів</li>
+    <li>---</li>
+    <li>AddMatcher</li>
+    <li>Layout</li>
+</ul>
+</details>

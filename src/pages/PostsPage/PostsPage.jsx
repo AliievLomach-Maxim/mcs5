@@ -1,11 +1,14 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchPosts, removePost } from '../../redux/oprations'
+import { fetchPosts, removePost } from '../../redux/postOprations'
 import toast from 'react-hot-toast'
+import PostFilter from '../../components/PostFilter/PostFilter'
+import { selectFilteredPosts } from '../../redux/postsSlice'
 
 const PostsPage = () => {
-  const { error, loading, posts } = useSelector((state) => state.posts)
   const dispatch = useDispatch()
+
+  const [counter, setCounter] = useState(0)
 
   useEffect(() => {
     dispatch(fetchPosts())
@@ -20,17 +23,26 @@ const PostsPage = () => {
       toast.error('some error...')
     }
   }
+
+  const filteredPost = useSelector(selectFilteredPosts)
+
   return (
     <div>
-      {loading && <h1>Loading...</h1>}
-      {error && <h1>Oops, some error</h1>}
-      {posts &&
-        posts.map((post) => (
-          <div key={post.id}>
-            {post.title}
-            <button onClick={() => handleRemove(post.id)}>remove</button>
-          </div>
-        ))}
+      <button onClick={() => setCounter((prev) => prev + 1)}>{counter}</button>
+      {filteredPost && (
+        <>
+          <PostFilter />
+          <br />
+          <br />
+          <br />
+          {filteredPost.map((post) => (
+            <div key={post.id}>
+              {post.title}
+              <button onClick={() => handleRemove(post.id)}>remove</button>
+            </div>
+          ))}
+        </>
+      )}
     </div>
   )
 }
