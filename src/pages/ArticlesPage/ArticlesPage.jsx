@@ -1,51 +1,27 @@
-import { useEffect, useState } from 'react'
-import { getArticles } from '../../api/articles'
 import ArticleList from '../../components/ArticleList/ArticleList'
-import { useSearchParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectArticles } from '../../redux/articlesSlice'
+import { fetchArticles } from '../../redux/articlesOprations'
+import { useEffect } from 'react'
 
 const ArticlesPage = () => {
-  const [articles, setArticles] = useState(null)
-
-  const [searchParams, setSearchParams] = useSearchParams()
-  const filterValue = searchParams.get('filter') ?? ''
-  // const [filterValue, setFilterValue] = useState('')
+  const articles = useSelector(selectArticles)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const fetching = async () => {
-      try {
-        const res = await getArticles()
-        setArticles(res.hits)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetching()
-  }, [])
+    dispatch(fetchArticles())
+  }, [dispatch])
 
-  const handleChange = ({ target: { value } }) => {
-    if (value) {
-      searchParams.set('filter', value)
-      setSearchParams(searchParams)
-    } else {
-      searchParams.delete('filter')
-      setSearchParams(searchParams)
-      // setSearchParams({})
-    }
-    // setSearchParams({ filter: value })
+  const getAgain = () => {
+    dispatch(fetchArticles())
   }
-
-  const filteredArticles = articles?.filter((el) =>
-    el.author.toLowerCase().includes(filterValue.toLowerCase())
-  )
 
   return (
     <div>
       <h1>ArticlesPage</h1>
+      <button onClick={getAgain}>getAgain</button>
       <br />
-      Filter by author:
-      <input type='text' value={filterValue} onChange={handleChange} />
-      <br />
-      {filteredArticles && <ArticleList hits={filteredArticles} />}
+      {articles && <ArticleList hits={articles} />}
     </div>
   )
 }
